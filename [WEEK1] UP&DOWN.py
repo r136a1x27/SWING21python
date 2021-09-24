@@ -23,7 +23,7 @@ while True :
         min_ = 1
         max_ = 100
         collect = random.randrange(1, 100)
-        # print(f"이번정답: {collect}") # test용 코드
+        print(f"이번정답: {collect}") # test용 코드
 
         # feedback1: 범위가 아닌 수를 입력한 경우는 입력 카운트 안되게 하기
         # for을 while문으로 변경하고 chance변수를 따로 선언하여 정상 입력에서만 카운트되도록 하기
@@ -44,7 +44,14 @@ while True :
                     best = min(record) # 현재 record 내 최솟값(best)와 비교해서
                     if chance < best:
                         print("최고기록 갱신~!") # 최고기록인지 알려주기
-                record.append(chance) # 그 후! record에 추가하기
+                        record.append(chance)  # 그 후! record에 추가하기
+                else: # feedback2: 최고기록만 기록에 추가하기
+                    # record가 없는 첫번째 기록이 문제라 if문 아래에 두지 못했는데,
+                    # else를 추가하여 해당 경우에도 핸들링 되도록 함
+                    record.append(chance) #
+
+                chance = 1 # chance를 1로 초기화하여 다음 게임을 준비함
+
                 break
 
             elif number < collect: # 정답보다 작은 수를 입력했을 경우,
