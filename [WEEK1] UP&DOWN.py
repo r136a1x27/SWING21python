@@ -10,7 +10,9 @@
 import random
 
 pointer = 0 # 선택지의 번호를 담을 변수 선언
+chance = 1 # 기회를 담을 변수 선언
 record = [] # record를 담을 변수 미리 선언
+
 while True :
     print("********************************")
     print("UP & DOWN 게임에 오신 걸 환영합니다~")
@@ -23,7 +25,9 @@ while True :
         collect = random.randrange(1, 100)
         # print(f"이번정답: {collect}") # test용 코드
 
-        for chance in range(1,10):
+        # feedback1: 범위가 아닌 수를 입력한 경우는 입력 카운트 안되게 하기
+        # for을 while문으로 변경하고 chance변수를 따로 선언하여 정상 입력에서만 카운트되도록 하기
+        while chance < 11:
             try:
                 number = int(input(f"{chance}번째 숫자 입력({min_}~{max_}) : "))
                 if number > 100 or number < 1:
@@ -47,11 +51,13 @@ while True :
                 if number > min_: # 최솟값 범위 조정
                     min_ = number+1
                 print("UP")
+                chance = chance + 1  # 정상 입력, 실패했을 때만 카운트가 올라감
 
             elif number > collect: # 정답보다 큰 수를 입력했을 경우,
                 if number < max_: # 최댓값 범위 조정
                     max_ = number-1
                 print("DOWN")
+                chance = chance + 1  # 정상 입력, 실패했을 때만 카운트가 올라감
 
     # 2. 기록확인
     elif pointer == 2:
