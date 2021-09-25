@@ -50,8 +50,10 @@ while True :
                         ### (1) 최고기록을 깬 경우 기록, 닉네임, 날짜정보 함께 저장하기
                         print("최고기록 갱신~!")
                         nickname = input("닉네임을 입력하세요 >> ")
-                        record.append(f"{chance}\t{nickname}\t{time.strftime('%Y-%m-%d')}")
-                        record.sort(key=lambda x: x[0])
+                        record.insert(0, f"{chance}\t{nickname}\t{time.strftime('%Y-%m-%d')}")
+                        # 최고기록을 맨 앞에 기록되게 코딩하면, sort 과정이 필요 없다.
+                        # record.append(f"{chance}\t{nickname}\t{time.strftime('%Y-%m-%d')}")
+                        # record.sort(key=lambda x: x[0])
 
                 else:
                     print("최초로 플레이하셨습니다!")
