@@ -1,7 +1,7 @@
 ##############################
 # SWING 파이썬 스터디 2주차 과제 #
 ##############################
-
+import os.path
 import random
 import time
 
@@ -9,7 +9,13 @@ record = []
 pointer = 0
 chance = 1
 
-### (3) 새로 게임을 시작하면 기록이 저장된 txt 파일 불러와서 record에 등록하기
+# feedback: 파일 없을 때 핸들링하기 (빈 파일을 만듦)
+if not os.path.isfile('record.txt'):
+    print("기록을 저장하는 데 필요한 record파일이 없습니다. record 파일을 생성합니다.")
+    # sys.exit()
+    f = open("record.txt", "w")
+    f.close()
+
 with open("record.txt", "r", encoding='UTF-8') as f:
     while True:
         line = f.readline()
@@ -31,7 +37,6 @@ while True :
         print(f"이번정답: {collect}") # test용 코드
 
         while chance < 11:
-            ### (4) try~except로 에러 처리하기
             try:
                 number = int(input(f"{chance}번째 숫자 입력({min_}~{max_}) : "))
                 if number > 100 or number < 1:
@@ -86,7 +91,6 @@ while True :
             print(f"{rank+1}위: {record[rank]}")
 
     # 3. 게임종료
-    ### (2) 게임 종료하면 그동안의 게임 기록을 txt파일에 저장하기
     elif pointer == 3:
         with open("record.txt", "w", encoding='UTF-8') as f:
             for record_ in record:
