@@ -1,4 +1,5 @@
 import urllib.request
+import re
 from bs4 import BeautifulSoup
 
 url = "http://www.swu.ac.kr/www/swuniversity.html"
@@ -9,7 +10,7 @@ print("*** 서울여자대학교 학과 및 홈페이지 정보 ***\n")
 print("학과\t\t\t\t\t\t홈페이지")
 
 uls = soup.findAll("ul", {"class":"col_list0"})
-
+re_ = re.compile('홈페이지.*')
 for ul in uls:
     lis = ul.findAll("li")
     for li in lis:
@@ -20,7 +21,7 @@ for ul in uls:
             soup = BeautifulSoup(web, "html.parser")
 
             try:
-                link = soup.find("span", text="홈페이지 바로가기").parent["href"]
+                link = soup.find("span", text=re_).parent["href"]
                 print(f"{name}\t\t\t{link}")
 
             except:
